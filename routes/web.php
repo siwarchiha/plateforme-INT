@@ -109,6 +109,7 @@ Route::post('/createform', [App\Http\Controllers\adminController::class, 'FormCr
 
 Route::post('/createformhistoric', [App\Http\Controllers\adminController::class, 'FormUpdate'])->name('form.update');
 Route::get('/forms/{id}', [App\Http\Controllers\adminController::class, 'show'])->name('form.show');
+Route::post('/submissionForm', [App\Http\Controllers\adminController::class, 'submission'])->name('form.submission');
 //Route::get('/my-submissions?{id}', [App\Http\Controllers\adminController::class, 'show'])->name('form.show');
 Route::get('/editform/{id}', [App\Http\Controllers\adminController::class, 'edit'])->name('form.edit');
 Route::get('/historicform/{id}', [App\Http\Controllers\adminController::class, 'historic'])->name('form.historic');

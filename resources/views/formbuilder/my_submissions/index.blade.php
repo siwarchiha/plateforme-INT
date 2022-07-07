@@ -45,6 +45,9 @@
                                             <a href="{{ route('form.historic', [$submission->id]) }}" class="btn btn-primary btn-sm" title="View submission">
                                                 <i class="fa fa-history"></i> 
                                             </a> 
+                                            <a class="btn btn-primary btn-sm" href="{{ route('formbuilder::form.render', $form->identifier) }}" title="Copy form URL to clipboard">
+                                                <i class="fa fa-clipboard"></i> 
+</a> 
 
                                           
 

@@ -14,6 +14,7 @@
                         <script>
 
          opt = <?php echo ($submission->formJson); ?>;
+         console.log(opt.id); 
          
 
 
@@ -23,35 +24,37 @@
                         
                         
                               
-                                <form action="" method="" id="form" class="d-inline-block">
+                                <form action="" method="POST" id="form" class="d-inline-block">
                                     @csrf 
                                     <div id="fb-render"> </div>
-                                    <!-- <div class="btn-toolbar float-md-right" role="toolbar">
-                            <div class="btn-group" role="group" aria-label="First group">
-                                <a href="{{ route('formbuilder::my-submissions.index') }}" class="btn btn-primary btn-sm" title="Back To My Submissions">
-                                    <i class="fa fa-arrow-left"></i> 
-                                </a>
-                                </div>
-                        </div> -->
-                        <div>
-
-                                    <button type="button" id="btn" class="btn btn-danger btn-sm rounded-0 confirm-form" onclick="send()" title="Delete this submission?">
-                                        <i class=""></i> Submit 
-                                    </button>
-    </div>
-                                </form> 
-                           
-                    </h5>
-                    
+                                    <div>
+                                        <button type="submit" id="btn" class="btn btn-danger btn-sm rounded-0 confirm-form save-form" onclick="send()" >
+                                            <i class=""></i> Submit 
+                                        </button>
+                                   </div>
+                                </form>                                                
                     <script>
-        var formeo = new FormeoRenderer({
-		renderContainer: '#fb-render',
-		  svgSprite: 'https://draggable.github.io/formeo/assets/img/formeo-sprite.svg',
-		  dataType: 'json',
-		});
- formeo.render(opt);
-</script> 
-                </div>
+                        btn=document.querySelector('#btn').addEventListener('click', onUpdate);
+                    </script>
+                    <script>
+                         formeo = new FormeoRenderer({
+                         renderContainer: '#fb-render',
+                         svgSprite: 'https://draggable.github.io/formeo/assets/img/formeo-sprite.svg',
+                         dataType: 'json',
+                         });
+                        formeo.render(opt); 
+                        //  const formeo = new Formeo({
+                        //  renderContainer: '#fb-render',
+                        // svgSprite: 'https://draggable.github.io/formeo/assets/img/formeo-sprite.svg',
+                        //  dataType: 'json',
+                        //  });
+                        // console.log(f);
+                      
+                         
+                </script> 
+              </h5>
+        
+            </div>
 
            
             </div>
@@ -60,16 +63,31 @@
         
     </div>
 </div>
+<div id="test" ></div>
 @endsection
 
 <script>
 function send()
 {
-var btn=document.getElementById('form');
-/*btn.addEventListener('click', function(e){
-   console.log(e);
-});*/
-console.log(opt);
+   
+    var token = $("input[name='_token']").val();
+    
+    $.ajax({
+                                        url:"{{route('form.submission')}}",
+                                        type: 'POST',
+                                        data:{ id:opt.id
+                                        formJson:opt,
+                                        _token:token,},
+                                        success: function(res){
+                                            if(res.error){
+                                               
+                                            }
+                                            if(res.success){
+                                                //window.location (name + " a été enregister dans la bd avec succée");
+                                            console.log(res.success);
+                                            }
+                                        }
+                                    });
 
 }
 </script>

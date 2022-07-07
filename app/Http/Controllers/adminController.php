@@ -11,6 +11,7 @@ use App\Models\FormSave;
 use App\Models\FormHistoric;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Submission;
 use App\Models\Operateur;
 use App\Models\Parametre;
 
@@ -507,6 +508,19 @@ class adminController extends Controller
         FormHistoric::create($requestData);
         return response()->json(['success'=>'Form Historic enregisté dans la bd avec succée']);
     }
+    public function submission(Request $request)
+    {
+        $requestData = $request->all();
+        Submission::create($requestData);
+        return response()->json(['success'=>'Form enregisté dans la bd avec succée']);
+    }
+    public function render($identifier)
+    {
+        $form = Form::where('identifier', $identifier)->firstOrFail();
 
+        $pageTitle = "{$form->name}";
+
+        return view('formbuilder::render.index', compact('form', 'pageTitle'));
+    }
     
 }
